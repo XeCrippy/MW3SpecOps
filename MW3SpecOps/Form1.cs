@@ -12,7 +12,7 @@ namespace MW3SpecOps
         IXboxConsole xb;
         private bool connected;
 
-        private byte[] ConvertHexStringToByteArray(string hex)
+        private byte[] ConvertHexStringToByteArray(string hex) // converts a hex string to a byte array ex: "3C40BFBF6042700B7C02E80041820008408200203C4083F06042010093E200003840270F1C4203E8905F00004A3B4CDC90DF00004A3B4CD4" to { 0x3C, 0x40 etc etc
         {
             int i = hex.Length;
             byte[] zero = new byte[i];
@@ -96,9 +96,9 @@ namespace MW3SpecOps
                 uint branchBytesMoney = 0x49C4B2FC;
                 uint newFuncAddrMoney = 0x83F00000;
                 string hexMoney = "3C40BFBF6042700B7C02E80041820008408200203C4083F06042010093E200003840270F1C4203E8905F00004A3B4CDC90DF00004A3B4CD4";
-                byte[] newFuncBytesMoney = ConvertHexStringToByteArray(hexMoney);
-                xb.SetMemory(newFuncAddrMoney, newFuncBytesMoney);
-                xb.WriteUInt32(branchAddrMoney, branchBytesMoney);
+                byte[] newFuncBytesMoney = ConvertHexStringToByteArray(hexMoney); // convert the hex string any way you want
+                xb.SetMemory(newFuncAddrMoney, newFuncBytesMoney); // then set memory 
+                xb.WriteUInt32(branchAddrMoney, branchBytesMoney); // write branch code // always inject the ppc hook before the branch code or you'll probably crash
             }
             catch(Exception ex)
             {
